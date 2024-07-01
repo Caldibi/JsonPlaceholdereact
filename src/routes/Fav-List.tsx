@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 
 
 
-interface Photo {
-    userId: number;
-    albumId: number;
-    id: number;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-  }
+//interface Photo {
+   // userId: number;
+   // albumId: number;
+   // id: number;
+   // title: string;
+   // url: string;
+   // thumbnailUrl: string;
+ // }
 
   const Img = styled.img`
   width : 200px;
@@ -36,7 +36,8 @@ export default function FavList() {
 const {photos, deletePhotoFromFavorites} = useFavoritesStore(); 
 const unFav = useFavoriteStore((state) => state.unFav)
 
-const handleDeleteFavorite = (photo: Photo) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleDeleteFavorite = (photo: any) => {
     deletePhotoFromFavorites(photo);
     unFav();
   };
@@ -49,21 +50,20 @@ return(
    <ul>
    {photos.map(photos =>(
        <><li key={photos.id}>
-          <div style={{ fontWeight: 'bold', textDecoration: 'underline',color:'white'}}>
+
            <Link to={`/users/${photos.albumId}/albums`}><Img src={photos.url}></Img>  <br /></Link>
 
-           <span >AlbumId: </span>{photos.albumId} <br />
-           <span >Id: </span> {photos.id}  <br />
-           <span >ThumUrl: </span> {photos.thumbnailUrl}  <br />
-           <span >Title: </span>{photos.title}  <br />
-           <span >Url: </span>  {photos.url}   <br />
+           <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>AlbumId: </span>{photos.albumId} <br />
+           <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>Id: </span> {photos.id}  <br />
+           <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>ThumUrl: </span> {photos.thumbnailUrl}  <br />
+           <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>Title: </span>{photos.title}  <br />
+           <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>Url: </span>  {photos.url}   <br />
+
            <br />
            <br />
-           </div>
        </li><Delete onClick={()=>handleDeleteFavorite(photos.id)}>Sil</Delete></>
 ))}
 </ul>
 </Container>
     </>
 )}
-
